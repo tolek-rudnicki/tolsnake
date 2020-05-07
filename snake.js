@@ -5,6 +5,6 @@ const food={
 }
 function placeFood()
 {
-    food.x=Math.random () *size;
-    food.y=Math.random () *size;
+    food.x = Math.floor(Math.random() * size);
+    food.y = Math.floor(Math.random() * size);
 }
