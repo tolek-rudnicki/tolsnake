@@ -1,4 +1,5 @@
 const snake = [
+    { x: 2, y: 0 },
     { x: 1, y: 0 },
     { x: 0, y: 0 },
 ];
@@ -18,7 +19,7 @@ function snakeMove(mx,my) {
     snake.unshift(newHead);
 
     // check if head not on food, then pop the tail
-    if (newHead.x!=food.x && newHead.y!=food.y) {
+    if (newHead.x!=food.x || newHead.y!=food.y) {
         snake.pop();
     }
 }
