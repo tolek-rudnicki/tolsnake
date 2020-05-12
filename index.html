@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Tolsnake</title>
     <script type="text/javascript" src="snake.js"></script>
+    <script type="text/javascript" src="board.js"></script>
     <style type="text/css">
       #board { background: #202020; padding: 10px; width: auto }
       #board span { display: inline-block; width: 20px; height: 20px; border: #505050 1px dotted; margin: 0 2px; }
@@ -11,92 +12,25 @@
       #board span.tail { background: #207020 }
       #board span.head { background: #20c020 }
       label { display: block }
+      .short { width: 3em }
+      .long { width: 40em }
     </style>
   </head>
   <body>
     <div id="board"></div>
     <div id="controls">
-      <label>Length <input id="length" readonly></label>
-      <label>Food <input id="food" readonly/> <input id="randomize-food" type="button" value="Randomize"/></label>
-      <label>Pace (ticks/second) <input id="pace" value="0.5"/></label>
+      <label>Length <input id="length" class="short" readonly></label>
+      <label>Food <input id="food" class="short" readonly/> <input id="randomize-food" type="button" value="Randomize"/></label>
+      <label>Snake <input id="snake" class="long" readonly></label>
+      <label>Pace (ticks/second) <input id="pace" class="short" value="2"/></label>
       <label>Direction <input id="direction" value="right" readonly/></label>
       <label>Run? <input id="run" type="checkbox"/></label>
     </div>
     <script type="text/javascript">
-      window.addEventListener("keydown", function (event) {
-        switch (event.keyCode) {
-          case 39: document.getElementById("direction").value = "right"; break;
-          case 40: document.getElementById("direction").value = "down"; break;
-          case 37: document.getElementById("direction").value = "left"; break;
-          case 38: document.getElementById("direction").value = "up"; break;
-        }
-      });
-
-      document.getElementById("run").addEventListener("change", function (event) {
-        if (this.checked) {
-          startSnake();
-        }
-      });
-
-      function executeGameTick() {
-        switch (document.getElementById("direction").value) {
-          case "right": snakeMove(1, 0); break;
-          case "down": snakeMove(0, 1); break;
-          case "left": snakeMove(-1, 0); break;
-          case "up": snakeMove(0, -1); break;
-        }
-        console.log(snake);
-      }
-
-      function drawBoard(size, snake, food) {
-        const board = document.getElementById("board");
-        board.innerHTML = "";
-        for (let y = 0; y < size; ++y) {
-          const row = document.createElement("div");
-          board.appendChild(row);
-          for (let x = 0; x < size; ++x) {
-            const field = document.createElement("span");
-            field.id = "field-" + x + "-" + y;
-            row.appendChild(field);
-          }
-        }
-        // draw food
-        document.getElementById("field-" + food.x + "-" + food.y).className = "food";
-        // draw snake
-        for (let i = 0; i < snake.length; ++i) {
-          const body = snake[i];
-          const fieldId = "field-" + body.x + "-" + body.y;
-          console.log(fieldId);
-          document.getElementById(fieldId).className = (i === 0 ? "head" : "tail");
-        }
-      }
-
-      function updateGameStats() {
-        document.getElementById("length").value = snake.length;
-        document.getElementById("food").value = food.x + " : " + food.y;
-      }
-
-      function startSnake() {
-        executeGameTick();
-        drawBoard(size, snake, food);
-        updateGameStats();
-        const sleep = 1000 / parseFloat(document.getElementById("pace").value);
-        console.log("Next tick in " + sleep + "ms");
-        if (document.getElementById("run").checked) {
-          setTimeout(startSnake, sleep);
-        }
-      }
-
+      installHandlers();
       placeFood();
       drawBoard(size, snake, food);
       updateGameStats();
-      document.getElementById("randomize-food").addEventListener("click", function () {
-        placeFood();
-        console.log(food);
-        drawBoard(size, snake, food);
-        updateGameStats()
-      });
-      console.log("Ready");
     </script>
   </body>
 </html>
