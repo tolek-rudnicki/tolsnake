@@ -6,6 +6,13 @@ function installHandlers() {
             case 40: document.getElementById("direction").value = "down"; break;
             case 37: document.getElementById("direction").value = "left"; break;
             case 38: document.getElementById("direction").value = "up"; break;
+            case 32: 
+                const run = document.getElementById("run");
+                run.checked = !run.checked;
+                if (run.checked) {
+                    executeGameTick();
+                }
+                break;
         }
     });
 
