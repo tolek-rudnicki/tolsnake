@@ -3,8 +3,34 @@
   <head>
     <meta charset="utf-8">
     <title>Tolsnake</title>
-    <script src="snake.js"></script>
+    <script type="text/javascript" src="snake.js"></script>
+    <script type="text/javascript" src="board.js"></script>
+    <style type="text/css">
+      #board { background: #202020; padding: 10px; width: auto }
+      #board span { display: inline-block; width: 20px; height: 20px; border: #505050 1px dotted; margin: 0 2px; }
+      #board span.food { background: #c02020 }
+      #board span.tail { background: #207020 }
+      #board span.head { background: #20c020 }
+      label { display: block }
+      .short { width: 3em }
+      .long { width: 40em }
+    </style>
   </head>
   <body>
+    <div id="board"></div>
+    <div id="controls">
+      <label>Length <input id="length" class="short" readonly></label>
+      <label>Food <input id="food" class="short" readonly/> <input id="randomize-food" type="button" value="Randomize"/></label>
+      <label>Snake <input id="snake" class="long" readonly></label>
+      <label>Pace (ticks/second) <input id="pace" class="short" value="2"/></label>
+      <label>Direction <input id="direction" value="right" readonly/></label>
+      <label>Run? <input id="run" type="checkbox"/></label>
+    </div>
+    <script type="text/javascript">
+      installHandlers();
+      placeFood();
+      drawBoard(size, snake, food);
+      updateGameStats();
+    </script>
   </body>
 </html>
