@@ -13,6 +13,7 @@ function installHandlers() {
                     executeGameTick();
                 }
                 break;
+            
         }
     });
 
@@ -59,6 +60,11 @@ function updateGameStats() {
     document.getElementById("length").value = snake.length;
     document.getElementById("snake").value = snake.map(function ({x, y}) { return x + ":" + y }).join(", ");
     document.getElementById("food").value = food.x + ":" + food.y;
+    localStorage.setItem("score",snake.length);
+    // if snke length is biger than the best score in local storage run : 
+    if (snake.length > localStorage.getItem("bestScore")) {
+        localStorage.setItem("bestScore", snake.length);
+    }
 }
 
 function executeGameTick() {
