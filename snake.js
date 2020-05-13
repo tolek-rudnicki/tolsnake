@@ -16,6 +16,18 @@ function snakeMove(mx,my) {
     // add new head to snake
     const newHead = { x: oldHead.x + mx, y: oldHead.y + my };
     snake.unshift(newHead);
+    if (newHead.x == size) {
+        newHead.x=0   
+       }
+    if (newHead.y == size) {
+        newHead.y=0
+    }
+    if (newHead.x == -1) {
+        newHead.x=size-1
+    }
+    if (newHead.y == -1) {
+        newHead.y=size-1
+    }
 
     // check if head not on food, then pop the tail
     if (newHead.x!=food.x || newHead.y!=food.y) {
@@ -31,3 +43,4 @@ function snakeMove(mx,my) {
         }
     }    
 }
+
