@@ -1,11 +1,12 @@
 function installHandlers() {
     // snake direction controls
     window.addEventListener("keydown", function (event) {
+        const direction = document.getElementById("direction");
         switch (event.keyCode) {
-            case 39: document.getElementById("direction").value = "right"; break;
-            case 40: document.getElementById("direction").value = "down"; break;
-            case 37: document.getElementById("direction").value = "left"; break;
-            case 38: document.getElementById("direction").value = "up"; break;
+            case 39: if (direction.value != "left") direction.value = "right"; break;
+            case 40: if (direction.value != "up") direction.value= "down"; break;
+            case 37: if (direction.value != "right") direction.value = "left"; break;
+            case 38: if (direction.value != "down") direction.value = "up"; break;
             case 32: 
                 const run = document.getElementById("run");
                 run.checked = !run.checked;

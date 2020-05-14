@@ -34,12 +34,17 @@ function snakeMove(mx,my) {
         snake.pop();
     } else {
         placeFood();
+        document.getElementById("pace").value = document.getElementById("pace").value * 1.01;
     }
     // detect if newHead is on body if yes take the player to game_over.html
     for (let index = 1; index < snake.length; ++index) {
         const body = snake[index];
         if (body.x == newHead.x && body.y == newHead.y) {
-            window.location.href = "game_over.html"
+            if (snake.length > 99) {
+                window.location.href = "you_won!.html" 
+            } else {
+             window.location.href = "game_over.html"
+            }   
         }
     }    
 }
