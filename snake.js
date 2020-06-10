@@ -17,7 +17,7 @@ function snakeMove(mx,my) {
     const newHead = { x: oldHead.x + mx, y: oldHead.y + my };
     snake.unshift(newHead);
     if (newHead.x == size) {
-        newHead.x=0   
+        newHead.x0   
        }
     if (newHead.y == size) {
         newHead.y=0
