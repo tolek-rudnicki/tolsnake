@@ -1,1 +1,1 @@
-new bug, on x cords when going out of the plate the snake disappears
+new bug, on x cords when going out of the plate the snake disappears-repared 17.06.2020 Tolek
